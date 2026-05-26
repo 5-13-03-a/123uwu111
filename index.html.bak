@@ -3373,5 +3373,32 @@
 
 <!-- [4. 程序入口] -->
 <script src="js/main.js"></script>     <!-- 主入口：初始化(init)、全局事件监听 -->
+<script>
+// 强制修复状态栏颜色：覆盖任何JS动态修改
+(function fixStatusBar() {
+    function forceWhite() {
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.content = '#ffffff';
+        document.documentElement.style.backgroundColor = '#ffffff';
+        document.body.style.backgroundColor = '#ffffff';
+    }
+    forceWhite();
+    // 持续监听，防止其他脚本再次修改
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+            if (m.target.tagName === 'META' && m.target.name === 'theme-color') {
+                if (m.target.content !== '#ffffff') {
+                    m.target.content = '#ffffff';
+                }
+            }
+        });
+    });
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) observer.observe(meta, { attributes: true });
+    // 延迟再执行一次，防止异步脚本修改
+    setTimeout(forceWhite, 500);
+    setTimeout(forceWhite, 2000);
+})();
+</script>
 </body>
 </html>

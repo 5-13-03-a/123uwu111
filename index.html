@@ -87,6 +87,23 @@
     <!-- <link rel="stylesheet" href="style.css"> (Deprecated) -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        html, body, .phone-screen {
+            background-color: #ffffff !important;
+        }
+        body {
+            position: fixed !important;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+        .phone-screen {
+            position: fixed !important;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100% !important;
+            height: 100dvh !important;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
 </head>
 
 <body>
